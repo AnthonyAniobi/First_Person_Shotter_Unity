@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private float bulletSpeed = 30f;
+    [SerializeField] private float bulletSpeed = 500f;
     [SerializeField] private float bulletLifeTime = 2f;
 
     [SerializeField] private Camera playerCamera;
@@ -18,11 +18,11 @@ public class Weapon : MonoBehaviour
 
     private int currentBurstCount = 0;
     [SerializeField] private float shootDelay = 0.2f;
+    [SerializeField] private float shootResetDelay = 2f;
     
     public ShootingMode currentShootingMode = ShootingMode.Single;
     public bool isShooting, readyToShoot = true;
 
-    private bool canResetShooting = true;
     
     public enum ShootingMode
     {
@@ -75,7 +75,7 @@ public class Weapon : MonoBehaviour
 
         if (allowResetShooting)
         {
-            Invoke("ResetShot", shootDelay);
+            Invoke("ResetShooting", shootResetDelay);
             allowResetShooting = false;
         }
         // Burst Mode
