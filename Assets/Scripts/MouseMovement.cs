@@ -5,7 +5,7 @@ public class MouseMovement : MonoBehaviour
 {
 
     [SerializeField] private float mouseSensitivity = 19f;
-    [SerializeField] private float topClamp = 90f;
+    [SerializeField] private float topClamp = -90f;
     [SerializeField] private float bottomClamp = 90f;
 
     private float rotationX = 0f;
@@ -27,7 +27,7 @@ public class MouseMovement : MonoBehaviour
        float mouseY = mouseDelta.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
 
        rotationX += mouseY;
-       rotationX = Mathf.Clamp(rotationX, -topClamp, bottomClamp);
+       rotationX = Mathf.Clamp(rotationX, topClamp, bottomClamp);
        rotationY += mouseX;
 
        transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0f);
