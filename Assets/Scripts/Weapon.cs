@@ -10,8 +10,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletSpeed = 500f;
     [SerializeField] private float bulletLifeTime = 2f;
 
-    [SerializeField] private Camera playerCamera;
-
     [SerializeField] private int burstCount = 3;
     [SerializeField] private float spreadIntensity = 0.1f;
     [SerializeField] private bool allowResetShooting = true;
@@ -19,9 +17,13 @@ public class Weapon : MonoBehaviour
     private int currentBurstCount = 0;
     [SerializeField] private float shootDelay = 0.2f;
     [SerializeField] private float shootResetDelay = 2f;
+
+    private Animator animator;
     
     public ShootingMode currentShootingMode = ShootingMode.Single;
     public bool isShooting, readyToShoot = true;
+
+    
 
     
     public enum ShootingMode
@@ -34,6 +36,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         ResetShooting();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,6 +69,9 @@ public class Weapon : MonoBehaviour
     private void FireWeapon()
     {
         readyToShoot = false;
+        //
+        animator.SetTrigger("RECOIL");
+
         Vector3 shootingDirection = GetBulletDirection().normalized;
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
@@ -95,7 +101,7 @@ public class Weapon : MonoBehaviour
     private Vector3 GetBulletDirection()
     {   
         // raycast from the center of the camera
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         
         Vector3 targetPoint;
         if(Physics.Raycast(ray, out RaycastHit hit))
