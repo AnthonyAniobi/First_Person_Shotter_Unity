@@ -388,8 +388,8 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 1633227744965699785}
   bulletSpeed: 500
   bulletLifeTime: 2
-  burstCount: 5
-  spreadIntensity: 0.1
+  burstCount: 0
+  spreadIntensity: 0.5
   allowResetShooting: 1
   shootDelay: 0.5
   shootResetDelay: 2
