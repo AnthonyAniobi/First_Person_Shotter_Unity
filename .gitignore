@@ -121,3 +121,6 @@ Thumbs.db
 Desktop.ini
 
 .idea/
+
+# remove external packages
+/Assets/ExternalPackages/
