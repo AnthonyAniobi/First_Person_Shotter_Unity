@@ -1,5 +1,7 @@
 # First Person Shooter in Unity
 
+<img src="/screenshots/recording2.gif" width="540" alt="Current project progress">
+
 A Unity first-person shooter prototype built while exploring player movement, camera control, the Input System, and simple projectile weapons.
 
 ## Current Features
@@ -79,4 +81,4 @@ Movement, look, jump, attack, and the other actions are defined in `Assets/Input
 
 The current build demonstrates the core FPS loop: move around the scene, look with the mouse, jump, and fire projectiles. The project is ready for the next gameplay layer, such as targets with health, enemy AI, weapon feedback, level design, and a user interface.
 
-<img src="/screenshots/current_stage.gif" width="240" alt="Current project progress">
+
