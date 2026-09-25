@@ -74,6 +74,7 @@ public class Weapon : MonoBehaviour
         //
         animator.SetTrigger("RECOIL");
         muzzleFlash.GetComponent<ParticleSystem>().Play();
+        SoundManager.instance.shootingSound.Play();
 
         Vector3 shootingDirection = GetBulletDirection().normalized;
 

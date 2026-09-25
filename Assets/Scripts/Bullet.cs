@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
         {
             CreateBulletImpactEffect(collision);
             print("Hit Target ${collision.gameObject.name}");
+            Destroy(gameObject);
         }
 
         if(collision.gameObject.CompareTag("Target"))
