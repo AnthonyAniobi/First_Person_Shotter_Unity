@@ -18,6 +18,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float shootDelay = 0.2f;
     [SerializeField] private float shootResetDelay = 2f;
 
+    [SerializeField] private GameObject muzzleFlash;
+
     private Animator animator;
     
     public ShootingMode currentShootingMode = ShootingMode.Single;
@@ -71,6 +73,7 @@ public class Weapon : MonoBehaviour
         readyToShoot = false;
         //
         animator.SetTrigger("RECOIL");
+        muzzleFlash.GetComponent<ParticleSystem>().Play();
 
         Vector3 shootingDirection = GetBulletDirection().normalized;
 
