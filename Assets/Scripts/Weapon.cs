@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private bool allowResetShooting = true;
 
     private int currentBurstCount = 0;
-    [SerializeField] private float shootDelay = 0.2f;
+    [SerializeField] private float burstDelay = 0.2f;
     [SerializeField] private float shootResetDelay = 2f;
 
     [SerializeField] private GameObject muzzleFlash;
@@ -114,7 +114,7 @@ public class Weapon : MonoBehaviour
         if(currentShootingMode == ShootingMode.Burst && currentBurstCount > 1)
         {
             currentBurstCount--;
-            Invoke("FireWeapon", shootDelay);
+            Invoke("FireWeapon", burstDelay);
         }
     }
 
