@@ -70,7 +70,9 @@ public class Weapon : MonoBehaviour
             isShooting = fireBullet.IsPressed();
         }
 
-        if (isShooting && readyToShoot && currentAmmo > 0)
+        if(currentAmmo <= 0  && isReloading == false){
+            SoundManager.instance.emptyMagazineSound.Play();
+        }else if (isShooting && readyToShoot && currentAmmo > 0)
         {
             currentBurstCount = burstCount;
             FireWeapon();
@@ -120,8 +122,10 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
+        SoundManager.instance.reloadSound.Play();
         isReloading = true;
         Debug.Log("Reloading...");
+        animator.SetTrigger("RELOAD");
         Invoke("ReloadCompleted", reloadTime);
     }
 
