@@ -12,6 +12,13 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.CompareTag("MetalWall"))
+        {
+            CreateBulletImpactEffect(collision);
+            print("Hit Target ${collision.gameObject.name}");
+            Destroy(gameObject);
+        }
+
         if(collision.gameObject.CompareTag("Target"))
         {
             print("Hit Target ${collision.gameObject.name}");
