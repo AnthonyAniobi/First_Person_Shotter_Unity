@@ -4933,7 +4933,7 @@ Transform:
   m_GameObject: {fileID: 1077948522396881866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0, z: 0.169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10170,12 +10170,16 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 1633227744965699785}
   bulletSpeed: 500
   bulletLifeTime: 2
-  burstCount: 0
+  burstCount: 1
   spreadIntensity: 0.5
   allowResetShooting: 1
-  shootDelay: 0.5
+  shootDelay: 0.3
   shootResetDelay: 2
   muzzleFlash: {fileID: 1077628796410097248}
+  magazineSize: 7
+  currentAmmo: 0
+  reloadTime: 1.5
+  isReloading: 0
   currentShootingMode: 0
   isShooting: 0
   readyToShoot: 1

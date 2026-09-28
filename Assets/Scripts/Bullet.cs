@@ -1,8 +1,16 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private float bulletLifeTime = 2.0f;
+
+    void Start()
+    {
+        StartCoroutine(RemoveBullet());
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -44,5 +52,11 @@ public class Bullet : MonoBehaviour
             Quaternion.LookRotation(contact.normal)
         );
         hole.transform.SetParent(objectHit.gameObject.transform);
+    }
+
+    private IEnumerator RemoveBullet()
+    {
+        yield return new WaitForSeconds(bulletLifeTime);
+        Destroy(gameObject);
     }
 }

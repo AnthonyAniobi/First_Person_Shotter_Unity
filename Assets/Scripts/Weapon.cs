@@ -8,7 +8,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float bulletSpeed = 500f;
-    [SerializeField] private float bulletLifeTime = 2f;
 
     [SerializeField] private int burstCount = 3;
     [SerializeField] private float spreadIntensity = 0.1f;
@@ -19,6 +18,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float shootResetDelay = 2f;
 
     [SerializeField] private GameObject muzzleFlash;
+
+    [SerializeField] private int magazineSize;
+    [SerializeField] private int currentAmmo;
+    [SerializeField] private float reloadTime;
+    [SerializeField] private bool isReloading = false;
+
 
     private Animator animator;
     
@@ -38,13 +43,17 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         ResetShooting();
+        currentAmmo = magazineSize;
         animator = GetComponent<Animator>();
+        SetAmmoText();
     }
 
     // Update is called once per frame
     void Update()
     {
         InputAction fireBullet = InputSystem.actions.FindAction("Attack");
+
+        InputAction reloadMagazine = InputSystem.actions.FindAction("Reload");
 
         
         if(currentShootingMode == ShootingMode.Single)
@@ -61,15 +70,29 @@ public class Weapon : MonoBehaviour
             isShooting = fireBullet.IsPressed();
         }
 
-        if (isShooting && readyToShoot)
+        if (isShooting && readyToShoot && currentAmmo > 0)
         {
             currentBurstCount = burstCount;
             FireWeapon();
+        }
+
+        if(reloadMagazine.WasPressedThisFrame() && isReloading == false && currentAmmo <= magazineSize)
+        {
+            Reload();
+        }
+        // Reload automatically when ammo is empty
+        if(currentAmmo <= 0 && isReloading == false)
+        {
+            Reload();
         }
     }
 
     private void FireWeapon()
     {
+        currentAmmo--;
+
+        SetAmmoText();
+
         readyToShoot = false;
         //
         animator.SetTrigger("RECOIL");
@@ -81,8 +104,7 @@ public class Weapon : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         bullet.transform.forward = shootingDirection;
         bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
-        StartCoroutine(RemoveBullet(bullet, bulletLifeTime));
-
+        
         if (allowResetShooting)
         {
             Invoke("ResetShooting", shootResetDelay);
@@ -96,11 +118,22 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private IEnumerator RemoveBullet(GameObject bullet, float delay)
+    private void Reload()
     {
-        yield return new WaitForSeconds(delay);
-        Destroy(bullet);
+        isReloading = true;
+        Debug.Log("Reloading...");
+        Invoke("ReloadCompleted", reloadTime);
     }
+
+    private void ReloadCompleted()
+    {
+        currentAmmo = magazineSize;
+        Debug.Log("Reload Complete");
+        isReloading = false;
+        SetAmmoText();
+    }
+
+   
 
     private Vector3 GetBulletDirection()
     {   
@@ -129,4 +162,15 @@ public class Weapon : MonoBehaviour
         readyToShoot = true;
         allowResetShooting = true;
     }
+
+    private void SetAmmoText()
+    {
+        if(AmmoManager.instance.ammoText != null)
+        {
+            AmmoManager.instance.ammoText.text = $"{currentAmmo} / {magazineSize}";
+        }
+    }
+
+
+    
 }
