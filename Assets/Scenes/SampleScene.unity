@@ -12853,10 +12853,10 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 513460756}
   bulletSpeed: 700
   burstCount: 1
-  spreadIntensity: 0.1
+  spreadIntensity: 0.15
   allowResetShooting: 0
   burstDelay: 0.2
-  shootResetDelay: 0.1
+  shootResetDelay: 0.12
   muzzleFlash: {fileID: 1294882286}
   magazineSize: 30
   currentAmmo: 0

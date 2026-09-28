@@ -29,9 +29,14 @@ public class Weapon : MonoBehaviour
     
     public ShootingMode currentShootingMode = ShootingMode.Single;
     public bool isShooting, readyToShoot = true;
+    public WeaponType currentWeaponType = WeaponType.Pistol1911;
 
     
-
+    public enum WeaponType
+    {
+        Pistol1911,
+        AK47
+    }
     
     public enum ShootingMode
     {
@@ -71,7 +76,7 @@ public class Weapon : MonoBehaviour
         }
 
         if(currentAmmo <= 0  && isReloading == false){
-            SoundManager.instance.emptyMagazineSound.Play();
+            SoundManager.instance.PlayEmptyMagazineSound(currentWeaponType);
         }else if (isShooting && readyToShoot && currentAmmo > 0)
         {
             currentBurstCount = burstCount;
@@ -99,7 +104,7 @@ public class Weapon : MonoBehaviour
         //
         animator.SetTrigger("RECOIL");
         muzzleFlash.GetComponent<ParticleSystem>().Play();
-        SoundManager.instance.shootingSound.Play();
+        SoundManager.instance.PlayShootingSound(currentWeaponType);
 
         Vector3 shootingDirection = GetBulletDirection().normalized;
 
@@ -122,7 +127,7 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
-        SoundManager.instance.reloadSound.Play();
+        SoundManager.instance.PlayReloadSound(currentWeaponType);
         isReloading = true;
         Debug.Log("Reloading...");
         animator.SetTrigger("RELOAD");
