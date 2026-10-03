@@ -23,6 +23,10 @@ public class InteractionManager : MonoBehaviour
     private void Update()
     {
         LookAtWeapon();
+        if(CustomInputManager.instance.PickUpWeaponInput())
+        {
+            PickupWeapon();
+        }
     }
 
     void LookAtWeapon()
@@ -63,9 +67,9 @@ public class InteractionManager : MonoBehaviour
     {
         if(currentWeapon != null)
         {
+            currentWeapon.GetComponent<Outline>().enabled = false;
             WeaponManager.instance.AddWeapon(currentWeapon);
-            currentWeapon.gameObject.SetActive(false);
-            currentWeapon = null;
+            
         }
     }
 }

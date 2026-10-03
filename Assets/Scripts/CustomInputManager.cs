@@ -54,4 +54,10 @@ public class CustomInputManager : MonoBehaviour
         InputAction reload = InputSystem.actions.FindAction("Reload");
         return reload.WasPressedThisFrame();
     }
+
+    public bool PickUpWeaponInput()
+    {
+        InputAction pickUpWeapon = InputSystem.actions.FindAction("PickUpWeapon");
+        return pickUpWeapon.WasPressedThisFrame();
+    }
 }
