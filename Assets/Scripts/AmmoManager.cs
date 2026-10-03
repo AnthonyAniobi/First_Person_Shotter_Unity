@@ -5,16 +5,22 @@ public class AmmoManager : MonoBehaviour
 {
     static public AmmoManager instance { get; set; }
 
-    public TextMeshProUGUI ammoText;
+    [SerializeField] private Weapon[] weapons;
+    Weapon currentWeapon;
+
     void Awake()
     {
         if(instance != null && instance != this)
         {
             Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
+            return;
         }
     }
+
+    void Start()
+    {
+        currentWeapon = weapons[0];
+        
+    }
+
 }

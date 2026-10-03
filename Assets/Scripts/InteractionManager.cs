@@ -3,6 +3,9 @@ using UnityEngine;
 public class InteractionManager : MonoBehaviour
 {
     static public InteractionManager instance {get; private set;}
+
+    Weapon currentWeapon;
+
     void Awake()
     {
         if(instance != null && instance != this)
@@ -26,10 +29,20 @@ public class InteractionManager : MonoBehaviour
              ))
         {
             GameObject hitObject = hit.transform.gameObject;
-            Weapon weapon;
-            if(hitObject.TryGetComponent(out weapon))
+            Weapon hitWeapon;
+            if(hitObject.TryGetComponent(out hitWeapon))
             {
-                print($"Weapon Selected: {weapon.name}");
+                currentWeapon = hitWeapon;
+                print($"Weapon Selected: {currentWeapon.name}");
+                currentWeapon.GetComponent<Outline>().enabled = true;
+            }
+            else
+            {
+                if(currentWeapon != null)
+                {
+                    currentWeapon.GetComponent<Outline>().enabled = false;
+                    currentWeapon = null;
+                }
             }
         }
 
