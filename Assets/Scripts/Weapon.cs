@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private bool isActive;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
@@ -23,11 +24,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int currentAmmo;
     [SerializeField] private float reloadTime;
     [SerializeField] private bool isReloading = false;
-    [SerializeField] private Vector3 shootingPosition;
-    [SerializeField] private Vector3 shootingRotation;
+    public Vector3 shootingPosition;
+    public Vector3 shootingRotation;
 
 
-    private Animator animator;
+    internal Animator animator;
     
     public ShootingMode currentShootingMode = ShootingMode.Single;
     public bool isShooting, readyToShoot = true;
