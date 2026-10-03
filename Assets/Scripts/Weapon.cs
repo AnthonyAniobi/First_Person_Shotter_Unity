@@ -57,24 +57,19 @@ public class Weapon : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        InputAction fireBullet = InputSystem.actions.FindAction("Attack");
-
-        InputAction reloadMagazine = InputSystem.actions.FindAction("Reload");
-
-        
+    {   
         if(currentShootingMode == ShootingMode.Single)
         {
             // tap to shoot
-            isShooting = fireBullet.WasPressedThisFrame();
+            isShooting = CustomInputManager.instance.GetShootInput(continuous: false);
         }else if(currentShootingMode == ShootingMode.Burst)
         {
             // tap to shoot
-            isShooting = fireBullet.WasPressedThisFrame();
+            isShooting = CustomInputManager.instance.GetShootInput(continuous: false);
         }else if(currentShootingMode == ShootingMode.Auto)
         {
             // Hold down to shoot
-            isShooting = fireBullet.IsPressed();
+            isShooting = CustomInputManager.instance.GetShootInput(continuous: true);
         }
 
         if(currentAmmo <= 0  && isReloading == false){
@@ -85,7 +80,7 @@ public class Weapon : MonoBehaviour
             FireWeapon();
         }
 
-        if(reloadMagazine.WasPressedThisFrame() && isReloading == false && currentAmmo <= magazineSize)
+        if(CustomInputManager.instance.GetReloadInput() && isReloading == false && currentAmmo <= magazineSize)
         {
             Reload();
         }

@@ -22,6 +22,11 @@ public class InteractionManager : MonoBehaviour
 
     private void Update()
     {
+        LookAtWeapon();
+    }
+
+    void LookAtWeapon()
+    {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if(Physics.Raycast(
             ray,
@@ -51,5 +56,16 @@ public class InteractionManager : MonoBehaviour
             ray.direction * 100f,
             Color.red
         );
+    }
+
+
+    void PickupWeapon()
+    {
+        if(currentWeapon != null)
+        {
+            WeaponManager.instance.AddWeapon(currentWeapon);
+            currentWeapon.gameObject.SetActive(false);
+            currentWeapon = null;
+        }
     }
 }

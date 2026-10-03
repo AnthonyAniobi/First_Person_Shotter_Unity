@@ -26,8 +26,15 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = weapons[0];
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-    // }
+    public void AddWeapon(Weapon weapon)
+    {
+        for(int i = 0; i < weapons.Length; i++)
+        {
+            if(weapons[i] == null)
+            {
+                weapons[i] = weapon;
+                return;
+            }
+        }
+    }
 }

@@ -19,10 +19,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InputAction moveAction = InputSystem.actions.FindAction("Move");
-        InputAction jumpAction = InputSystem.actions.FindAction("Jump");
-
-        Vector2 input = moveAction.ReadValue<Vector2>();
+        Vector2 input = CustomInputManager.instance.GetMovementInput();
         Vector3 move =  Vector3.zero;
         if (controller.isGrounded)
         {
@@ -30,10 +27,8 @@ public class PlayerMovement : MonoBehaviour
             move.y = 0f;
             move.Normalize();
         }
-        
-        // controller.Move(speed * Time.deltaTime * move);
 
-        if(jumpAction.WasPressedThisFrame() && controller.isGrounded)
+        if(CustomInputManager.instance.GetJumpInput() && controller.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
