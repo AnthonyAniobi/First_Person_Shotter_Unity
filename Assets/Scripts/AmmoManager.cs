@@ -6,7 +6,7 @@ public class AmmoManager : MonoBehaviour
     static public AmmoManager instance { get; set; }
 
     public TextMeshProUGUI ammoText;
-    void Start()
+    void Awake()
     {
         if(instance != null && instance != this)
         {
