@@ -3,6 +3,10 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     static public WeaponManager instance { get; private set; }
+
+    [SerializeField] private Weapon[] weapons;
+    [SerializeField] private Weapon currentWeapon;
+
     void Awake()
     {
         if(instance != null && instance != this)
@@ -17,9 +21,13 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        currentWeapon = weapons[0];
     }
+
+    // // Update is called once per frame
+    // void Update()
+    // {
+    // }
 }
