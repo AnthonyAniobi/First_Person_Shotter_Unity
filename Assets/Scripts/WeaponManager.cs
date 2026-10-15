@@ -29,6 +29,7 @@ public class WeaponManager : MonoBehaviour
 
     internal void AddWeapon(Weapon weapon)
     {
+        Debug.Log($"Adding weapon: {weapon.name}, totalWeapons: {totalWeapons}, weapons.Length: {weapons.Length}");
         if(weapons.Length == 0)
         {
             weapons[0] = weapon;

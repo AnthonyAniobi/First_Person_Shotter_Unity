@@ -25,6 +25,7 @@ public class InteractionManager : MonoBehaviour
         LookAtWeapon();
         if(CustomInputManager.instance.PickUpWeaponInput())
         {
+            Debug.Log("PickUpWeaponInput() detected in InteractionManager");
             PickupWeapon();
         }
     }
@@ -42,7 +43,6 @@ public class InteractionManager : MonoBehaviour
             if(hitObject.TryGetComponent(out hitWeapon))
             {
                 currentWeapon = hitWeapon;
-                print($"Weapon Selected: {currentWeapon.name}");
                 currentWeapon.GetComponent<Outline>().enabled = true;
             }
             else
@@ -65,11 +65,12 @@ public class InteractionManager : MonoBehaviour
 
     void PickupWeapon()
     {
+        Debug.Log("PickupWeapon() called");
         if(currentWeapon != null)
         {
+            Debug.Log($"Picked up {currentWeapon.name}");
             currentWeapon.GetComponent<Outline>().enabled = false;
             WeaponManager.instance.AddWeapon(currentWeapon);
-            
         }
     }
 }

@@ -20,11 +20,11 @@ public class MouseMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       InputAction mouseDelta = InputSystem.actions.FindAction("Look");
+       Vector2 mouseDelta = CustomInputManager.instance.GetViewInput();
        /// mouseX is for rotation up and down
-       float mouseX = mouseDelta.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
+       float mouseX = mouseDelta.x * mouseSensitivity * Time.deltaTime;
        /// mouseY is for rotation left and right
-       float mouseY = mouseDelta.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
+       float mouseY = mouseDelta.y * mouseSensitivity * Time.deltaTime;
 
        rotationX += mouseY;
        rotationX = Mathf.Clamp(rotationX, topClamp, bottomClamp);

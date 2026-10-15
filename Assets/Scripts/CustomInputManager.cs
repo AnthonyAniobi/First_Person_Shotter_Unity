@@ -28,7 +28,7 @@ public class CustomInputManager : MonoBehaviour
 {
     static public CustomInputManager instance { get; private set; }
 
-    public InputActionMap inputMap; 
+    private InputActionMap inputMap; 
 
     void Awake()
     {

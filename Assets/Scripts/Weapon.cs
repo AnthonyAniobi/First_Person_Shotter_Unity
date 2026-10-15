@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private bool isActive;
+    [SerializeField] private bool isActive = false;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
@@ -58,7 +58,11 @@ public class Weapon : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        if (!isActive)
+        {
+            return;
+        }
         if(currentShootingMode == ShootingMode.Single)
         {
             // tap to shoot
@@ -177,7 +181,4 @@ public class Weapon : MonoBehaviour
             AmmoManager.instance.ammoText.text = $"{currentAmmo} / {magazineSize}";
         }
     }
-
-
-    
 }
