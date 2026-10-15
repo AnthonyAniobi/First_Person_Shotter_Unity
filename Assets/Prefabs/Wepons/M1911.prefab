@@ -10168,6 +10168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2ef9ede316f444cba660136102f425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  isActive: 0
   bulletPrefab: {fileID: 6116923646809411416, guid: 2f0fb4cdc5a50461d93e4117b6dccbd5, type: 3}
   bulletSpawnPoint: {fileID: 1633227744965699785}
   bulletSpeed: 500
@@ -10182,7 +10183,7 @@ MonoBehaviour:
   reloadTime: 1.5
   isReloading: 0
   shootingPosition: {x: 0.288, y: 1.4, z: 0.91}
-  shootingRotation: {x: 2.9, y: 176.94, z: 0}
+  shootingRotation: {x: 2.9, y: 176.94, z: 90}
   currentShootingMode: 0
   isShooting: 0
   readyToShoot: 1
