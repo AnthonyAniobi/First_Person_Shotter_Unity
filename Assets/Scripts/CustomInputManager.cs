@@ -1,9 +1,35 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum ActionMapType
+{
+    Player,
+    UI
+}
+
+static class ActionMapNames
+{
+    public static String GetName(this ActionMapType actionMapType)
+    {
+        switch (actionMapType)
+        {
+            case ActionMapType.Player:
+                return "Player";
+            case ActionMapType.UI:
+                return "UI";
+            default:
+                throw new ArgumentOutOfRangeException(nameof(actionMapType), actionMapType, null);
+        }
+    }
+}
 
 public class CustomInputManager : MonoBehaviour
 {
     static public CustomInputManager instance { get; private set; }
+
+    public InputActionMap inputMap; 
+
     void Awake()
     {
         if(instance != null && instance != this)
@@ -18,21 +44,30 @@ public class CustomInputManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        SwitchActionMap(ActionMapType.Player);
+    }
+
+    void SwitchActionMap(ActionMapType actionMapName)
+    {
+        inputMap = InputSystem.actions.FindActionMap(actionMapName.GetName());
+        inputMap.Enable();
+    }
+
     public Vector2 GetMovementInput()
     {
-        InputAction moveAction = InputSystem.actions.FindAction("Move");
-        return moveAction.ReadValue<Vector2>();
+        return inputMap.FindAction("Move").ReadValue<Vector2>();
     }
 
     public Vector2 GetViewInput()
     {
-        InputAction lookAction = InputSystem.actions.FindAction("Look");
-        return lookAction.ReadValue<Vector2>();
+        return inputMap.FindAction("Look").ReadValue<Vector2>();
     }
 
     public bool GetShootInput(bool continuous = false)
     {
-        InputAction shoot = InputSystem.actions.FindAction("Attack");
+        InputAction shoot = inputMap.FindAction("Attack");
         if(continuous)
         {
             return shoot.IsPressed();
@@ -45,19 +80,19 @@ public class CustomInputManager : MonoBehaviour
 
     public bool GetJumpInput()
     {
-        InputAction jump = InputSystem.actions.FindAction("Jump");
+        InputAction jump = inputMap.FindAction("Jump");
         return jump.WasPressedThisFrame();
     }
 
     public bool GetReloadInput()
     {
-        InputAction reload = InputSystem.actions.FindAction("Reload");
+        InputAction reload = inputMap.FindAction("Reload");
         return reload.WasPressedThisFrame();
     }
 
     public bool PickUpWeaponInput()
     {
-        InputAction pickUpWeapon = InputSystem.actions.FindAction("PickUpWeapon");
+        InputAction pickUpWeapon = inputMap.FindAction("PickUpWeapon");
         return pickUpWeapon.WasPressedThisFrame();
     }
 }
