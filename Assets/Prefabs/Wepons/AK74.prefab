@@ -10239,7 +10239,7 @@ MonoBehaviour:
   currentAmmo: 0
   reloadTime: 1.5
   isReloading: 0
-  shootingPosition: {x: 0, y: 1.435, z: 0}
+  shootingPosition: {x: 0.1, y: 1.435, z: 1.1}
   shootingRotation: {x: 2.9, y: 176.94, z: 0}
   currentShootingMode: 2
   isShooting: 0
